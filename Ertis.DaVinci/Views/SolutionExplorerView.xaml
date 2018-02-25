@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Ertis.DaVinci.Views.SolutionExplorerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ertis.DaVinci.Views"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:telerikControlsInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
+             xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:converters="clr-namespace:Ertis.DaVinci.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="300"
+             x:Name="BaseLayout">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="FileItemTemplate">
+            <TextBlock Text="{Binding Path=FileInfo.Name}" />
+        </DataTemplate>
+
+        <HierarchicalDataTemplate x:Key="FolderItemTemplate" ItemsSource="{Binding Children}">
+            <TextBlock Text="{Binding Path=FileInfo.Name}" />
+        </HierarchicalDataTemplate>
+
+        <converters:SolutionExplorerItemTemplateSelector x:Key="SolutionExplorerItemTemplateSelector" 
+                                                         FileItemTemplate="{StaticResource FileItemTemplate}"
+                                                         FolderItemTemplate="{StaticResource FolderItemTemplate}">
+        </converters:SolutionExplorerItemTemplateSelector>
+    </UserControl.Resources>
+    
+    <Grid>
+        <TreeView ItemsSource="{Binding SolutionService.CurrentSolution.ProjectList}" Loaded="TreeView_Loaded">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Files}" ItemTemplateSelector="{StaticResource SolutionExplorerItemTemplateSelector}">
+                    <TextBlock Text="{Binding Path=Name}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>    
+        </TreeView>
+    </Grid>
+</UserControl>

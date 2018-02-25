@@ -1,0 +1,956 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{95559792-39ED-40A8-90C3-C4B8518A4F64}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ertis.DaVinci</RootNamespace>
+    <AssemblyName>Ertis.DaVinci</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Data.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Mvvm.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v16.2.Core">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Pdf.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.2.Core">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Printing.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Core.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Docking.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v16.2.Core">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Layout.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisDark.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Themes.MetropolisDark.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisLight.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Themes.MetropolisLight.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016White.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Themes.Office2016White.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Prism\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Prism\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.UnityExtensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Prism\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\ServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Unity\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Unity\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Unity\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Windows.Controls, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Controls.Chart.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Chart.Direct2D, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Controls.Chart.Direct2D.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Controls.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Controls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Documents.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Core, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Documents.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Flow, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Documents.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Html, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Documents.FormatProviders.Html.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Zip, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Telerik\Telerik.Windows.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WPFLocalizeExtension, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFLocalizeExtension.3.1.0\lib\net35\WPFLocalizeExtension.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WpfRichText, Version=1.0.16.0, Culture=neutral, PublicKeyToken=75ccead1e6af2af3, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfRichText.1.0.16.2\lib\net45\WpfRichText.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="XamlBuildTask" />
+    <Reference Include="XAMLMarkupExtensions, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAMLMarkupExtensions.1.3.0\lib\net40\XAMLMarkupExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\ExportWebsiteCommand.cs" />
+    <Compile Include="Commands\OpenProjectCommand.cs" />
+    <Compile Include="Commands\RefreshSolutionCommand.cs" />
+    <Compile Include="Commands\SaveProjectCommand.cs" />
+    <Compile Include="Converters\AbsolutePathConverter.cs" />
+    <Compile Include="Converters\HtmlFormatter.cs" />
+    <Compile Include="Converters\NullToBooleanConverter.cs" />
+    <Compile Include="Converters\SectionTemplateSelector.cs" />
+    <Compile Include="Converters\SolutionExplorerItemTemplateSelector.cs" />
+    <Compile Include="DaVinciModule.cs" />
+    <Compile Include="Events\PageAddedEvent.cs" />
+    <Compile Include="Events\PageRefreshEvent.cs" />
+    <Compile Include="Events\SelectedPageChangedEvent.cs" />
+    <Compile Include="Helpers\WebBrowserUtility.cs" />
+    <Compile Include="HtmlModels\Banner.cs" />
+    <Compile Include="HtmlModels\BasicSection.cs" />
+    <Compile Include="HtmlModels\BlogSection.cs" />
+    <Compile Include="HtmlModels\Body.cs" />
+    <Compile Include="HtmlModels\CardsSection.cs" />
+    <Compile Include="HtmlModels\ContactSection.cs" />
+    <Compile Include="HtmlModels\Footer.cs" />
+    <Compile Include="HtmlModels\GallerySection.cs" />
+    <Compile Include="HtmlModels\GoogleMapsSection.cs" />
+    <Compile Include="HtmlModels\Head.cs" />
+    <Compile Include="HtmlModels\Header.cs" />
+    <Compile Include="HtmlModels\HtmlModel.cs" />
+    <Compile Include="HtmlModels\IHtml.cs" />
+    <Compile Include="HtmlModels\ImageInfo.cs" />
+    <Compile Include="HtmlModels\ImageSection.cs" />
+    <Compile Include="HtmlModels\MainContent.cs" />
+    <Compile Include="HtmlModels\MetroSection.cs" />
+    <Compile Include="HtmlModels\Page.cs" />
+    <Compile Include="HtmlModels\ParagraphSection.cs" />
+    <Compile Include="HtmlModels\ProductCard.cs" />
+    <Compile Include="HtmlModels\Section.cs" />
+    <Compile Include="HtmlModels\SectionType.cs" />
+    <Compile Include="HtmlModels\SubParagraph.cs" />
+    <Compile Include="HtmlModels\WebSite.cs" />
+    <Compile Include="HtmlXamlConversion\htmlcssparser.cs" />
+    <Compile Include="HtmlXamlConversion\htmlfromxamlconverter.cs" />
+    <Compile Include="HtmlXamlConversion\htmllexicalanalyzer.cs" />
+    <Compile Include="HtmlXamlConversion\htmlparser.cs" />
+    <Compile Include="HtmlXamlConversion\htmlschema.cs" />
+    <Compile Include="HtmlXamlConversion\htmltokentype.cs" />
+    <Compile Include="HtmlXamlConversion\htmltoxamlconverter.cs" />
+    <Compile Include="Managers\SolutionManager.cs" />
+    <Compile Include="Managers\TemplateManager.cs" />
+    <Compile Include="Models\FileSystemEntity.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\SiteSettings.cs" />
+    <Compile Include="Models\Solution.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\SectionSerializer.cs" />
+    <Compile Include="Services\Interfaces\ISolutionService.cs" />
+    <Compile Include="Services\SolutionService.cs" />
+    <Compile Include="ViewModels\AddPageViewModel.cs" />
+    <Compile Include="ViewModels\AddSectionViewModel.cs" />
+    <Compile Include="ViewModels\CreateSolutionViewModel.cs" />
+    <Compile Include="ViewModels\DesignerViewModel.cs" />
+    <Compile Include="ViewModels\SiteSettingsViewModel.cs" />
+    <Compile Include="ViewModels\SolutionExplorerViewModel.cs" />
+    <Compile Include="ViewModels\WebBrowserViewModel.cs" />
+    <Compile Include="Views\AddPageView.xaml.cs">
+      <DependentUpon>AddPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddSectionView.xaml.cs">
+      <DependentUpon>AddSectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateSolutionView.xaml.cs">
+      <DependentUpon>CreateSolutionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DesignerView.xaml.cs">
+      <DependentUpon>DesignerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SiteSettingsView.xaml.cs">
+      <DependentUpon>SiteSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SolutionExplorerView.xaml.cs">
+      <DependentUpon>SolutionExplorerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebBrowserView.xaml.cs">
+      <DependentUpon>WebBrowserView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ErtAwesome\ErtAwesome.csproj">
+      <Project>{c496c03b-eee4-43cc-9c10-95b6c5213de1}</Project>
+      <Name>ErtAwesome</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ertis.Core\Ertis.Core.csproj">
+      <Project>{906b3268-188c-4b01-b865-abd6ac59498a}</Project>
+      <Name>Ertis.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ertis.Infrastructure\Ertis.Infrastructure.csproj">
+      <Project>{9f178d9f-ecfa-4f8d-bc50-ac9ef3a2ac92}</Project>
+      <Name>Ertis.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ertis.Localization\Ertis.Localization.csproj">
+      <Project>{4077d586-94f5-47ff-9400-1d11dd4d02ca}</Project>
+      <Name>Ertis.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ertis.Search\Ertis.Search.csproj">
+      <Project>{029c06e9-fd6b-45e6-a88d-383c1523a0bd}</Project>
+      <Name>Ertis.Search</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ertis.Themes\Ertis.Themes.csproj">
+      <Project>{8c05345a-0d0d-460f-9acc-0471733d6dba}</Project>
+      <Name>Ertis.Themes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ertis.UI\Ertis.Shared.csproj">
+      <Project>{f1322bc4-f75c-411d-bb70-4bdc8136ce9a}</Project>
+      <Name>Ertis.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\AddPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddSectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateSolutionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DesignerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SiteSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SolutionExplorerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WebBrowserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\WebContent\css\bootstrap.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\css\common.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\css\gallery.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\css\lightbox.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\css\main.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\css\plugins.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\css\responsive.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\android-icon-192x192.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\apple-icon-114x114.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\apple-icon-120x120.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\apple-icon-144x144.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\apple-icon-152x152.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\apple-icon-180x180.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\apple-icon-57x57.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\apple-icon-60x60.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\apple-icon-72x72.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\apple-icon-76x76.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\favicon-16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\favicon-32x32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fav-icon\favicon-96x96.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\product.card.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.cards.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.metro.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.blog.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.gallery.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="Resources\WebContent\img\bg\bg-fashion-ex.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-fashion.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-1-2.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-1.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-10.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-2.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-3.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-4.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-5.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-6.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-7.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-8.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-img-9.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-natural.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-premium.jpg" />
+    <Content Include="Resources\WebContent\img\bg\bg-sport.jpg" />
+    <Content Include="Resources\WebContent\img\bg\exbg-img-1.jpg" />
+    <Content Include="Resources\WebContent\img\bg\exbg-img-2.jpg" />
+    <Content Include="Resources\WebContent\img\blog\blog-1.jpg" />
+    <Content Include="Resources\WebContent\img\blog\blog-2.jpg" />
+    <Content Include="Resources\WebContent\img\blog\blog-3.jpg" />
+    <Content Include="Resources\WebContent\img\card-services\card-service-1.jpg" />
+    <Content Include="Resources\WebContent\img\card-services\card-service-2.jpg" />
+    <Content Include="Resources\WebContent\img\card-services\card-service-3.jpg" />
+    <Content Include="Resources\WebContent\img\card-services\fashion.jpg" />
+    <Content Include="Resources\WebContent\img\card-services\fashione-ex.jpg" />
+    <Content Include="Resources\WebContent\img\card-services\natural.jpg" />
+    <Content Include="Resources\WebContent\img\card-services\premium.jpg" />
+    <Content Include="Resources\WebContent\img\card-services\sport.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\bamboa.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\bci.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\becool.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\bluesign.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\btc.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\co.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\ekotex.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\gots.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\modal.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\ocm.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\ocs.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\organic_cotton.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\organic_linen.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\organic_wool.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\reach.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\seacell.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\supima.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\tencel.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\viscose.jpg" />
+    <Content Include="Resources\WebContent\img\certificates\woolmark.jpg" />
+    <Content Include="Resources\WebContent\img\clients\client1.png" />
+    <Content Include="Resources\WebContent\img\clients\client2.png" />
+    <Content Include="Resources\WebContent\img\clients\client3.png" />
+    <Content Include="Resources\WebContent\img\clients\client4.png" />
+    <Content Include="Resources\WebContent\img\clients\client5.png" />
+    <Content Include="Resources\WebContent\img\clients\client6.png" />
+    <Content Include="Resources\WebContent\img\clients\client7.png" />
+    <Content Include="Resources\WebContent\img\clients\client8.png" />
+    <EmbeddedResource Include="Resources\WebContent\img\culcuoglunewlogo.png" />
+    <Content Include="Resources\WebContent\img\fabrics\fashion.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\FINEJ.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\FINEJ2.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\FINEJ3.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\FINEJ4.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\FINEJ5.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\FINEJ6.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\FINEJ7.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\natural.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\premium.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\sport.jpg" />
+    <Content Include="Resources\WebContent\img\fabrics\Tintex_Fábrica_Cerveira-6427_01_3.jpg" />
+    <Content Include="Resources\WebContent\img\fashion\1.jpg" />
+    <Content Include="Resources\WebContent\img\fashion\1ex.jpg" />
+    <Content Include="Resources\WebContent\img\fashion\2.jpg" />
+    <Content Include="Resources\WebContent\img\fashion\3.jpg" />
+    <Content Include="Resources\WebContent\img\firm\firm-1.png" />
+    <Content Include="Resources\WebContent\img\gallery\1.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\10.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\11.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\12.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\13.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\2.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\3.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\4.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\5.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\6.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\7.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\8.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\9.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\1.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\12.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\14.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\15.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\16.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\18.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\2.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\27.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\3.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\30.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\31.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\32.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\33.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\34.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\36.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\38.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\40.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\42.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\44.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\5.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\6.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\7.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\8.jpg" />
+    <Content Include="Resources\WebContent\img\gallery\mock\9.jpg" />
+    <Content Include="Resources\WebContent\img\mockups\imac.png" />
+    <Content Include="Resources\WebContent\img\mockups\mockup-imac-dual.png" />
+    <Content Include="Resources\WebContent\img\mockups\mockup-iphon-dual.png" />
+    <Content Include="Resources\WebContent\img\mockups\orme2.jpg" />
+    <Content Include="Resources\WebContent\img\mockups\slider-iphon.png" />
+    <Content Include="Resources\WebContent\img\natural\1.jpg" />
+    <Content Include="Resources\WebContent\img\natural\10.jpg" />
+    <Content Include="Resources\WebContent\img\natural\2.jpg" />
+    <Content Include="Resources\WebContent\img\natural\3.jpg" />
+    <Content Include="Resources\WebContent\img\natural\4.jpg" />
+    <Content Include="Resources\WebContent\img\natural\5.jpg" />
+    <Content Include="Resources\WebContent\img\natural\6.jpg" />
+    <Content Include="Resources\WebContent\img\natural\7.jpg" />
+    <Content Include="Resources\WebContent\img\natural\8.jpg" />
+    <Content Include="Resources\WebContent\img\natural\9.jpg" />
+    <Content Include="Resources\WebContent\img\natural\IMG_7865.jpg" />
+    <Content Include="Resources\WebContent\img\natural\IMG_8108.JPG" />
+    <Content Include="Resources\WebContent\img\portfolio\item-portfolio-11.jpg" />
+    <Content Include="Resources\WebContent\img\portfolio\item-portfolio-12.jpg" />
+    <Content Include="Resources\WebContent\img\portfolio\item-portfolio-13.jpg" />
+    <Content Include="Resources\WebContent\img\portfolio\item-portfolio-14.jpg" />
+    <Content Include="Resources\WebContent\img\portfolio\item-portfolio-15.jpg" />
+    <Content Include="Resources\WebContent\img\portfolio\item-portfolio-16.jpg" />
+    <Content Include="Resources\WebContent\img\portfolio\item-portfolio-17.jpg" />
+    <Content Include="Resources\WebContent\img\portfolio\item-portfolio-18.jpg" />
+    <Content Include="Resources\WebContent\img\premium\1.jpg" />
+    <Content Include="Resources\WebContent\img\premium\2.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\exrev_img_1.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\exrev_img_2.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\exrev_img_3.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\exrev_img_4.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\rev_img_1.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\rev_img_2.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\rev_img_3.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\rev_img_4.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\rev_img_5.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\rev_img_6.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\rev_img_7.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\rev_img_8.jpg" />
+    <Content Include="Resources\WebContent\img\revslider\rev_img_9.jpg" />
+    <EmbeddedResource Include="Resources\WebContent\img\smalllogo.png" />
+    <EmbeddedResource Include="Resources\WebContent\img\smallogo.png" />
+    <Content Include="Resources\WebContent\img\sport\1.jpg" />
+    <Content Include="Resources\WebContent\img\sport\2.jpg" />
+    <Content Include="Resources\WebContent\img\sport\3.jpg" />
+    <Content Include="Resources\WebContent\img\team\person-1.jpg" />
+    <Content Include="Resources\WebContent\img\team\person-2.jpg" />
+    <Content Include="Resources\WebContent\img\works\item-work-1.jpg" />
+    <Content Include="Resources\WebContent\img\works\item-work-2.jpg" />
+    <Content Include="Resources\WebContent\img\works\item-work-3.jpg" />
+    <Content Include="Resources\WebContent\img\works\item-work-4.jpg" />
+    <Content Include="Resources\WebContent\img\works\item-work-5.jpg" />
+    <Content Include="Resources\WebContent\img\works\item-work-6.jpg" />
+    <Content Include="Resources\WebContent\img\works\item-work-7.jpg" />
+    <Content Include="Resources\WebContent\img\works\item-work-8.jpg" />
+    <EmbeddedResource Include="Resources\WebContent\js\gallery.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\js\gscripts.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\js\jquery.easing.1.3.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\js\jquery.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\js\libs\jquery.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\js\main.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\js\modernizr-2.6.2.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\bootstrap\js\bootstrap.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\bootstrap\js\tether.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\css\font-awesome.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\css\font-awesome.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\fonts\fontawesome-webfont.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\ionicons-2.0.1\css\ionicons.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\ionicons-2.0.1\css\ionicons.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\ionicons-2.0.1\fonts\ionicons.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\isotope\isotope.pkgd.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\lightbox\dist\css\lightbox.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\lightbox\dist\images\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\lightbox\dist\images\loading.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\lightbox\dist\images\next.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\lightbox\dist\images\prev.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\OwlCarousel\dist\assets\owl.carousel.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\OwlCarousel\dist\assets\owl.theme.default.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\OwlCarousel\dist\assets\owl.video.play.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\OwlCarousel\dist\owl.carousel.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\assets\coloredbg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\assets\gridtile.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\assets\gridtile_3x3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\assets\gridtile_3x3_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\assets\gridtile_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\assets\loader.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\css\closedhand.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\css\layers.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\css\navigation.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\css\openhand.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\css\settings.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\font-awesome\css\font-awesome.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\pe-icon-7-stroke\css\pe-icon-7-stroke.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\extensions\revolution.extension.actions.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\extensions\revolution.extension.carousel.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\extensions\revolution.extension.kenburn.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\extensions\revolution.extension.layeranimation.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\extensions\revolution.extension.migration.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\extensions\revolution.extension.navigation.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\extensions\revolution.extension.parallax.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\extensions\revolution.extension.slideanims.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\extensions\revolution.extension.video.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\jquery.themepunch.revolution.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\js\jquery.themepunch.tools.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\WebContent\css\.DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fonts\lightcase.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fonts\lightcase.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\fonts\lightcase.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\ionicons.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\ionicons.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\revicons.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\revicons.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\lightcase.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\lightcase.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\lightcase.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\fontawesome-webfont.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\fontawesome-webfont.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Others\fontawesome-webfont.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Resources\WebContent\img\.DS_Store" />
+    <None Include="Resources\WebContent\img\bg\.DS_Store" />
+    <None Include="Resources\WebContent\img\card-services\.DS_Store" />
+    <None Include="Resources\WebContent\img\certificates\.DS_Store" />
+    <None Include="Resources\WebContent\img\fashion\.DS_Store" />
+    <None Include="Resources\WebContent\img\gallery\.DS_Store" />
+    <None Include="Resources\WebContent\img\gallery\mock\.DS_Store" />
+    <None Include="Resources\WebContent\img\mockups\.DS_Store" />
+    <None Include="Resources\WebContent\img\natural\.DS_Store" />
+    <None Include="Resources\WebContent\img\premium\.DS_Store" />
+    <None Include="Resources\WebContent\img\revslider\.DS_Store" />
+    <None Include="Resources\WebContent\img\sport\.DS_Store" />
+    <EmbeddedResource Include="Resources\WebContent\js\.DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Resources\WebContent\libs\.DS_Store" />
+    <None Include="Resources\WebContent\libs\font-awesome-4.7.0\.DS_Store" />
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\css\.DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\fonts\.DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\fonts\fontawesome-webfont.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\fonts\fontawesome-webfont.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\font-awesome-4.7.0\fonts\FontAwesome.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Resources\WebContent\libs\ionicons-2.0.1\.DS_Store" />
+    <EmbeddedResource Include="Resources\WebContent\libs\ionicons-2.0.1\css\.DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\ionicons-2.0.1\fonts\.DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\ionicons-2.0.1\fonts\ionicons.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\ionicons-2.0.1\fonts\ionicons.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\ionicons-2.0.1\fonts\ionicons.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Resources\WebContent\libs\revolution\.DS_Store" />
+    <None Include="Resources\WebContent\libs\revolution\fonts\.DS_Store" />
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\font-awesome\fonts\fontawesome-webfont.eot_">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\font-awesome\fonts\fontawesome-webfont.eot_v=4.2.0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\font-awesome\fonts\fontawesome-webfont.svg_v=4.2.0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\font-awesome\fonts\fontawesome-webfont.ttf_v=4.2.0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\font-awesome\fonts\fontawesome-webfont.woff_v=4.2.0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.eot_">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.eot_d7yf1v">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.svg_d7yf1v">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.ttf_d7yf1v">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.woff_d7yf1v">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\revicons\.DS_Store">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\revicons\revicons.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\revicons\revicons.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\libs\revolution\fonts\revicons\revicons.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WebContent\WebResources.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Templates\banner.slide.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\body.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\footer.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\head.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\header.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\imagebox.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\main.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\page.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.image.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.banner.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.basic.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.contact.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.googlemap.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\sections.paragraph.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

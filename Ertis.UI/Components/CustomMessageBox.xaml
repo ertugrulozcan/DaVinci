@@ -1,0 +1,238 @@
+﻿<UserControl x:Class="Ertis.Shared.Components.CustomMessageBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ertis.Shared.Components"
+             xmlns:converters="clr-namespace:Ertis.Shared.Converters"
+             xmlns:vectors="clr-namespace:ErtAwesome;assembly=ErtAwesome"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+
+        <DataTemplate x:Key="BlankTemplate">
+            <Grid>
+
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OkTemplate">
+            <Grid>
+                <Button Content="{lex:Loc Ok}" 
+                        Command="{Binding Path=OkButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                        WindowChrome.IsHitTestVisibleInChrome="True" 
+                        IsDefault="True"
+                        IsTabStop="True"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        MinWidth="100" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OkCancelTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="{lex:Loc Ok}" 
+                        Command="{Binding Path=OkButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                        WindowChrome.IsHitTestVisibleInChrome="True" 
+                        IsDefault="True"
+                        IsTabStop="True"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        MinWidth="100" 
+                        Grid.Column="0" />
+
+                <Button Content="{lex:Loc Cancel}" 
+                        Command="{Binding Path=CancelButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                        WindowChrome.IsHitTestVisibleInChrome="True" 
+                        IsCancel="True"
+                        IsTabStop="True"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        MinWidth="100" 
+                        Grid.Column="2" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="YesNoTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="{lex:Loc Yes}" Command="{Binding Path=YesButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100" Grid.Column="0" />
+                <Button Content="{lex:Loc No}" Command="{Binding Path=NoButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100" Grid.Column="2" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="YesNoCancelTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="{lex:Loc Yes}" Command="{Binding Path=YesButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100" Grid.Column="0" />
+                <Button Content="{lex:Loc No}" Command="{Binding Path=NoButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100" Grid.Column="2" />
+                <Button Content="{lex:Loc Cancel}" Command="{Binding Path=CancelButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100" Grid.Column="4" />
+            </Grid>
+        </DataTemplate>
+
+        <local:CustomMessageBoxButtonsTemplateSelector x:Key="ButtonsTemplateSelector"
+                                                       BlankTemplate="{StaticResource BlankTemplate}"
+                                                       OkTemplate="{StaticResource OkTemplate}"
+                                                       OkCancelTemplate="{StaticResource OkCancelTemplate}"
+                                                       YesNoTemplate="{StaticResource YesNoTemplate}"
+                                                       YesNoCancelTemplate="{StaticResource YesNoCancelTemplate}">
+        </local:CustomMessageBoxButtonsTemplateSelector>
+
+        <ControlTemplate x:Key="CloseButtonCanvas" TargetType="Label">
+            <Viewbox>
+                <Canvas SnapsToDevicePixels="True" Width="15" Height="15">
+                    <Line Stroke="{TemplateBinding Foreground}" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" X1="3" Y1="3" X2="12" Y2="12" SnapsToDevicePixels="True"/>
+                    <Line Stroke="{TemplateBinding Foreground}" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" X1="12" Y1="3" X2="3" Y2="12" SnapsToDevicePixels="True"/>
+                </Canvas>
+            </Viewbox>
+        </ControlTemplate>
+
+        <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Width" Value="15" />
+            <Setter Property="Height" Value="15" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Background" Value="{Binding Background}"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="#555555" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" >
+                            <Label Template="{StaticResource CloseButtonCanvas}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="Transparent" TargetName="border"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ContrastBrush13}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="#777777" TargetName="border"/>
+                                <Setter Property="Foreground" Value="#C71113" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="#DEDEDE" TargetName="border"/>
+                                <Setter Property="Foreground" Value="Red" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#ADADAD"/>
+                                <Setter Property="BorderBrush" Value="#DEDEDE" TargetName="border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Border Background="{DynamicResource Brush10}" BorderBrush="{DynamicResource PrimaryChromeBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Margin="7,4,7,0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Grid Width="19" Height="19" Margin="0,2,0,0">
+                            <vectors:ImageIcon Icon="Ertis" Fill="{DynamicResource ContrastBrush7}" />
+                        </Grid>
+
+                        <TextBlock Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                   Foreground="{DynamicResource ContrastBrush1}" 
+                                   FontSize="11.5"
+                                   TextWrapping="NoWrap"
+                                   VerticalAlignment="Center"
+                                   Margin="10,1,5,0" />
+                    </StackPanel>
+                </Grid>
+
+                <Button x:Name="CloseButton" 
+                        Style="{StaticResource CloseButtonStyle}" 
+                        Command="{Binding Path=CancelButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                        WindowChrome.IsHitTestVisibleInChrome="True" 
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Right" 
+                        Margin="0,3,0,0" 
+                        Grid.Column="1" />
+            </Grid>
+
+            <Grid Margin="30,5,30,17" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <ContentControl Content="{Binding Path=AwesomeIcon, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                        Visibility="{Binding Path=AwesomeIcon, Converter={StaticResource NullToVisibilityConverter}}"
+                                        UseLayoutRounding="True"
+                                        SnapsToDevicePixels="True"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center" 
+                                        Width="60" 
+                                        Height="60" />
+                    </Grid>
+
+                    <Grid Margin="20,0,0,0" Grid.Column="1">
+                        <ScrollViewer VerticalContentAlignment="Center" 
+                                      VerticalScrollBarVisibility="Auto" 
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      WindowChrome.IsHitTestVisibleInChrome="True">
+                            <TextBlock Text="{Binding Path=Message, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                       Foreground="{DynamicResource ContrastBrush5}" 
+                                       FontSize="12.5" 
+                                       TextWrapping="Wrap" 
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Stretch" />
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0,12,0,0">
+                    <ContentControl Content="{Binding Path=DialogType, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                    ContentTemplateSelector="{StaticResource ButtonsTemplateSelector}" 
+                                    HorizontalAlignment="Center" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

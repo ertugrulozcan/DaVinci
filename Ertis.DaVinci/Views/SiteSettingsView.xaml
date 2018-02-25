@@ -1,0 +1,178 @@
+﻿<UserControl x:Class="Ertis.DaVinci.Views.SiteSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ertis.DaVinci.Views"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1100"
+             Width="600">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Ertis.Shared;component/Resources/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="15,12">
+            <StackPanel MaxWidth="500" DataContext="{Binding CurrentSiteSettings}">
+                <GroupBox Header="{lex:Loc ContactInformations}" Margin="0,0,0,10" Padding="10,8">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{lex:Loc Address}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                            <TextBox Text="{Binding Address}" Grid.Row="1" />
+                        </Grid>
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{lex:Loc PhoneNumber}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                            <TextBox Text="{Binding PhoneNumber}" Grid.Row="1" />
+                        </Grid>
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{lex:Loc EmailAddress}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                            <TextBox Text="{Binding EmailAddress}" Grid.Row="1" />
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="{lex:Loc SocialMedia}" Margin="0,0,0,10" Padding="10,8">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{lex:Loc Facebook}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding HasFacebookAccount}" VerticalAlignment="Center" Margin="0,0,7,0" />
+                                <TextBox Text="{Binding FacebookAccountLink}" IsEnabled="{Binding HasFacebookAccount}" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{lex:Loc Twitter}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding HasTwitterAccount}" VerticalAlignment="Center" Margin="0,0,7,0" />
+                                <TextBox Text="{Binding TwitterAccountLink}" IsEnabled="{Binding HasTwitterAccount}" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{lex:Loc Instagram}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding HasInstagramAccount}" VerticalAlignment="Center" Margin="0,0,7,0" />
+                                <TextBox Text="{Binding InstagramAccountLink}" IsEnabled="{Binding HasInstagramAccount}" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{lex:Loc Linkedin}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding HasLinkedinAccount}" VerticalAlignment="Center" Margin="0,0,7,0" />
+                                <TextBox Text="{Binding LinkedinAccountLink}" IsEnabled="{Binding HasLinkedinAccount}" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="{lex:Loc GoogleMapsSettings}" Margin="0,0,0,10" Padding="10,8">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid Margin="0,0,5,0" Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{lex:Loc Latitude}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                                <TextBox Text="{Binding Latitude}" Grid.Row="1" />
+                            </Grid>
+
+                            <Grid Margin="5,0,0,0" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{lex:Loc Longitude}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                                <TextBox Text="{Binding Longitude}" Grid.Row="1" />
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <Grid Margin="0,7,0,8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{lex:Loc FooterText}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                    <TextBox Text="{Binding FooterText}" Grid.Row="1" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

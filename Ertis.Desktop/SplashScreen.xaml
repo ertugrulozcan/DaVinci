@@ -1,0 +1,39 @@
+﻿<Window x:Class="Ertis.Desktop.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ertis.Desktop"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        WindowStyle="None"
+        Height="400" Width="400"
+        x:Name="MainWindow">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SubTitleTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="Foreground" Value="#AAAAAA" />
+                <Setter Property="FontSize" Value="10.5" />
+                <Setter Property="Margin" Value="0,0,0,4" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=MainWindow}" UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+
+    <!--<Grid Background="#171717">
+        <Image Source="Resources/ertis.logo.white2.png" VerticalAlignment="Center" HorizontalAlignment="Center" Width="70" Height="70" />
+
+        <TextBlock Text="Ertis © 2017" Style="{StaticResource SubTitleTextBlockStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,8" />
+    </Grid>-->
+
+    <Grid Background="#171717">
+        <Image Source="Resources/splash.png"  />
+
+        <TextBlock Text="Ertis © 2017" Style="{StaticResource SubTitleTextBlockStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,8" />
+    </Grid>
+</Window>

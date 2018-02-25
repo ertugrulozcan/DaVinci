@@ -1,0 +1,221 @@
+/* ===================================================
+
+   MatX Media Queries
+
+   TOC:
+        01. screen width less than 1401px and more then 1040  ( Extra large Screen / Desktop )
+        02. screen width more than 1200px and less then 1300  ( Mid large Screen / Desktop )
+        03. screen width less than 1200px  ( large Screen / Notebook )
+        04. screen width more than 767px  ( Tablets & Desktop Screen )
+        05. screen width less than 992px  ( Medium Screen / Tablets )
+        06. screen width less than 801px  ( Medium wide Screen / Small Tablets )
+        07. screen width less than 768px  ( Medium Screen / Smaller Tablets )
+        08. screen width less than 603px  ( Medium Screen / Mobile )
+        09. screen width less than 600px  ( Medium Screen / Mobile )
+        10. screen width less than 500px  ( Small Screen / Mobile )
+        11. screen width less than 370px  ( Smaller Screen / Mobile )
+
+====================================================== */
+
+
+/* screen width less than 1401px and more then 1040
+------------------------------- */
+
+
+/* screen width less than 1401px and more then 1040
+------------------------------- */
+
+@media (max-width: 1440px) and (min-width: 1040px) {}
+
+
+/* screen width more than 1200px and less then 1300
+---------------------------------------------------- */
+
+@media (min-width: 1201px) and (max-width: 1367px) {}
+
+
+/* screen width less than 1200px
+------------------------------- */
+
+@media (max-width: 1200px) {}
+
+
+/* screen width less than 1024px
+--------------------------------- */
+
+@media (max-width: 1024px) {
+    .main-header {
+        top: 0;
+    }
+    #owl-carousel-client .owl-nav .owl-prev {
+        left: -30px;
+    }
+    #owl-carousel-client .owl-nav .owl-next {
+        right: -30px;
+    }
+}
+
+
+/* screen width less than 992px
+--------------------------------- */
+
+@media (min-width: 991px) {}
+
+
+/* screen width less than 801px
+------------------------------ */
+
+@media (max-width: 800px) {
+    .card-service .title {
+        margin: 0;
+    }
+    .card-service .detaild {
+        padding: 15px 5px;
+    }
+    .m-b-md{
+      margin-bottom: 4.286rem;
+    }
+    .widget .recent-posts li.recent-item {
+    min-height: 96px;
+    padding-left: 0;
+    padding-top: 80px;
+}
+.detail_portfolio {
+    padding-left: 0;
+    padding-top: 3rem;
+}
+}
+
+
+/* screen width more than 767px
+------------------------------ */
+
+@media (max-width: 768px) {}
+
+
+/* screen width less than 603px
+------------------------------ */
+
+@media (max-width: 603px) {}
+
+
+/* screen width less than 600px
+------------------------------ */
+
+@media (max-width: 600px) {
+    html, body {
+        font-size: 12px!important;
+    }
+    .section-title.m-4 {
+        margin: 4.286rem 1rem;
+    }
+    #app div img {
+        margin-bottom: 36px;
+    }
+    .pharse h4, .purchase h4 {
+        margin-bottom: 2rem;
+    }
+    .pharse .btn, .purchase .btn {
+        margin-left: 0;
+    }
+    .section-title h1 {
+        font-size: 2.714rem;
+    }
+    .section-title .section-title-p {
+        margin-left: 1rem!important;
+        margin-right: 1rem!important;
+    }
+    #text {
+        margin: 0 2rem;
+    }
+    #owl-carousel-comment .item .comment img {
+    width: 40%;
+}
+}
+
+
+/* screen width less than 500px
+------------------------------ */
+
+@media (max-width: 500px) {}
+
+
+/* screen width less than 400px
+------------------------------ */
+
+@media (max-width: 440px) {
+    .rev-title-content h2 {
+        font-size: 1.429rem;
+        margin-bottom: 0.5rem;
+    }
+    .rev-title-content h1 {
+        font-size: 2.571rem;
+    }
+    .feature-icon .icon>div {
+        padding-top: 6px;
+    }
+    .timeline-item .date {
+        top: 0;
+    }
+    .rev-title-content p {
+        font-size: 14px;
+        line-height: 24px;
+    }
+    #owl-carousel-client .owl-nav .owl-prev {
+        left: -50px;
+    }
+    #owl-carousel-client .owl-nav .owl-next {
+        right: -50px;
+    }
+    .timeline-item {
+        margin-bottom: 0.5rem;
+    }
+    .timeline-item.left .date {
+        right: 0;
+    }
+    .timeline-item.right .date {
+        left: 0;
+    }
+    .timeline-item.left .icon {
+        right: 0;
+        left: inherit;
+    }
+    .timeline-item.left .date {
+        left: 0;
+        right: inherit;
+    }
+    .section-title-p.px-4 {
+        padding-left: 2.143rem;
+        padding-right: 2.143rem;
+    }
+    .feature .feature-icon-2:first-child {
+        margin-top: 5.714rem;
+    }
+    .header-title p {
+        font-size: 1.714rem;
+    }
+    .header-title h1 {
+        font-size: 4.714rem;
+        margin-bottom: -1rem;
+    }
+    #skill div:last-child div.col-md-6:last-child{
+        margin-top: 5.714rem;
+    }
+    .why-choose .row div.p-4{
+        padding: 2.143rem 1.070rem;
+    }
+    .why-choose .row div.bg-white{
+        margin: 0 1rem;
+    }
+    .widget .recent-posts li.recent-item {
+    min-height: 96px;
+    padding-left: 100px;
+    padding-top: 16px;
+}
+}
+
+
+/* screen width less than 370px
+------------------------------ */
+
+@media (max-width: 370px) {}

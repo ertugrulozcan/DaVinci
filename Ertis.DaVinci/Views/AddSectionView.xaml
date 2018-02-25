@@ -1,0 +1,928 @@
+﻿<UserControl x:Class="Ertis.DaVinci.Views.AddSectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ertis.DaVinci.Views"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:telerikControlsInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
+             xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:converters="clr-namespace:Ertis.DaVinci.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600"
+             Width="800" MinHeight="450" MaxHeight="600"
+             x:Name="BaseLayout">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Ertis.Shared;component/Resources/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:NullToBooleanConverter x:Key="NullToBooleanConverter" />
+            <converters:OppositeNullToBooleanConverter x:Key="OppositeNullToBooleanConverter" />
+            <converters:AbsolutePathConverter x:Key="AbsolutePathConverter" />
+            
+            <ControlTemplate x:Key="TextEditorTemplate">
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Button}" x:Key="formatTextStyle">
+                            <Setter Property="FontFamily" Value="Palatino Linotype"></Setter>
+                            <Setter Property="Width" Value="30"></Setter>
+                            <Setter Property="FontSize" Value ="14"></Setter>
+                            <Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"></Setter>
+                        </Style>
+
+                        <Style TargetType="{x:Type Button}" x:Key="formatImageStyle">
+                            <Setter Property="Width" Value="30"></Setter>
+                            <Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"></Setter>
+                        </Style>
+
+                        <Style TargetType="{x:Type fa:ImageAwesome}" x:Key="ToolbarButtonIconStyle">
+                            <Setter Property="Width" Value="11"></Setter>
+                            <Setter Property="Height" Value="11"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource ContrastBrush7}"></Setter>
+                        </Style>
+                    </Grid.Resources>
+
+                    <DockPanel Name="mainPanel">
+                        <!-- This tool bar contains all the editing buttons. -->
+                        <ToolBar Name="mainToolBar" Background="{DynamicResource Brush15}" Height="30" DockPanel.Dock="Top">
+                            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Cut" ToolTip="Cut">
+                                <fa:ImageAwesome Icon="Cut" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Copy" ToolTip="Copy">
+                                <fa:ImageAwesome Icon="Edit" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Paste" ToolTip="Paste">
+                                <fa:ImageAwesome Icon="Paste" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Undo" ToolTip="Undo">
+                                <fa:ImageAwesome Icon="ArrowCircleRight" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Redo" ToolTip="Redo">
+                                <fa:ImageAwesome Icon="ArrowCircleLeft" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleBold" ToolTip="Bold">
+                                <TextBlock FontWeight="Bold" Foreground="{DynamicResource ContrastBrush7}">B</TextBlock>
+                            </Button>
+                            <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleItalic" ToolTip="Italic">
+                                <TextBlock FontStyle="Italic" FontWeight="Bold" Foreground="{DynamicResource ContrastBrush7}">I</TextBlock>
+                            </Button>
+                            <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleUnderline" ToolTip="Underline">
+                                <TextBlock TextDecorations="Underline" FontWeight="Bold" Foreground="{DynamicResource ContrastBrush7}">U</TextBlock>
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseFontSize" ToolTip="Grow Font">
+                                <fa:ImageAwesome Icon="SortAlphaAsc" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseFontSize" ToolTip="Shrink Font">
+                                <fa:ImageAwesome Icon="SortAlphaDesc" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleBullets" ToolTip="Bullets">
+                                <fa:ImageAwesome Icon="List" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleNumbering" ToolTip="Numbering">
+                                <fa:ImageAwesome Icon="ListOl" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignLeft" ToolTip="Align Left">
+                                <fa:ImageAwesome Icon="AlignLeft" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignCenter" ToolTip="Align Center">
+                                <fa:ImageAwesome Icon="AlignCenter" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignRight" ToolTip="Align Right">
+                                <fa:ImageAwesome Icon="AlignRight" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignJustify" ToolTip="Align Justify">
+                                <fa:ImageAwesome Icon="AlignJustify" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseIndentation" ToolTip="Increase Indent">
+                                <fa:ImageAwesome Icon="Indent" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseIndentation" ToolTip="Decrease Indent">
+                                <fa:ImageAwesome Icon="Indent" Style="{StaticResource ToolbarButtonIconStyle}" />
+                            </Button>
+                        </ToolBar>
+
+                        <!-- By default pressing tab moves focus to the next control. Setting AcceptsTab to true allows the RichTextBox to accept tab characters. -->
+                        <toolkit:RichTextBox Name="mainRTB" 
+                                             Text="{Binding Text}"
+                                             Background="{DynamicResource Brush12}" 
+                                             Foreground="{DynamicResource ContrastBrush2}"
+                                             AcceptsTab="True" 
+                                             MinHeight="200" 
+                                             MaxHeight="400" 
+                                             MaxWidth="800" 
+                                             Margin="0,6,0,0">
+                            <!--<toolkit:RichTextBox.TextFormatter>
+                                        <converters:HtmlFormatter />
+                                    </toolkit:RichTextBox.TextFormatter>-->
+                            <toolkit:RichTextBox.TextFormatter>
+                                <toolkit:PlainTextFormatter />
+                            </toolkit:RichTextBox.TextFormatter>
+                        </toolkit:RichTextBox>
+                    </DockPanel>
+                </Grid>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="SectionTypeRadioButtonTemplate" TargetType="{x:Type RadioButton}">
+                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5" Width="110" Height="70" Margin="7">
+                    <ContentPresenter TextElement.Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Border>
+
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="False">
+                        <Setter Property="Background" Value="{DynamicResource Brush8}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource ContrastBrush28}" />
+                        <Setter Property="Foreground" Value="{DynamicResource ContrastBrush21}" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource Brush5}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource ContrastBrush31}" />
+                        <Setter Property="Foreground" Value="{DynamicResource ContrastBrush21}" />
+                    </Trigger>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource PrimaryChromeBrush}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource ContrastBrush31}" />
+                        <Setter Property="Foreground" Value="{DynamicResource Brush5}" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <DataTemplate x:Key="BannerDataTemplate">
+                <StackPanel Margin="20,10">
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <TextBox Text="{Binding Title}" Grid.Row="1" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc SubTitle}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <TextBox Text="{Binding SubTitle}" Grid.Row="1" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Text}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <Grid Grid.Row="1">
+                            <ContentControl Template="{StaticResource TextEditorTemplate}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{lex:Loc SliderImages}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                        <TextBox Text="{Binding SliderImagePathsString, Mode=OneWay}" IsReadOnly="True" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                        <Button Content="..." 
+                                Command="{Binding DataContext.SelectBackgroundImageButtonCommand, ElementName=BaseLayout}" 
+                                CommandParameter="{Binding Path=.}"
+                                VerticalAlignment="Center" 
+                                Height="21" 
+                                Margin="4,0,0,0" 
+                                Grid.Row="1" 
+                                Grid.Column="1" />
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MetroDataTemplate">
+                <StackPanel Margin="20,10">
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <TextBox Text="{Binding Title}" Grid.Row="1" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc SubTitle}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <TextBox Text="{Binding SubTitle}" Grid.Row="1" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{lex:Loc BackgroundImage}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                        <TextBox Text="{Binding BackgroundImagePath, Mode=OneWay}" IsReadOnly="True" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                        <Button Content="..." 
+                                Command="{Binding DataContext.SelectBackgroundImageButtonCommand, ElementName=BaseLayout}" 
+                                CommandParameter="{Binding Path=.}"
+                                VerticalAlignment="Center" 
+                                Height="21" 
+                                Margin="4,0,0,0" 
+                                Grid.Row="1" 
+                                Grid.Column="1" />
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="BasicSectionDataTemplate">
+                <StackPanel Margin="20,10">
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <TextBox Text="{Binding Title}" Grid.Row="1" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Text}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <Grid Grid.Row="1">
+                            <ContentControl Template="{StaticResource TextEditorTemplate}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{lex:Loc BackgroundImage}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                        <TextBox Text="{Binding BackgroundImagePath}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                        <Button Content="..." 
+                                Command="{Binding DataContext.SelectBackgroundImageButtonCommand, ElementName=BaseLayout}" 
+                                CommandParameter="{Binding Path=.}"
+                                VerticalAlignment="Center" 
+                                Height="21" 
+                                Margin="4,0,0,0" 
+                                Grid.Row="1" 
+                                Grid.Column="1" />
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="CardsSectionDataTemplate">
+                <Grid Margin="20,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Cards}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <ComboBox ItemsSource="{Binding Cards}" 
+                                      SelectedItem="{Binding DataContext.SelectedCard, ElementName=BaseLayout}" 
+                                      DisplayMemberPath="Title"
+                                      Grid.Column="0" />
+                            <Button Content="{lex:Loc AddCard}" 
+                                    Command="{Binding DataContext.AddCardButtonCommand, ElementName=BaseLayout}" 
+                                    CommandParameter="{Binding Path=.}"
+                                    Width="100" 
+                                    Margin="8,0,0,0"
+                                    Grid.Column="1" />
+                        </Grid>
+                    </Grid>
+
+                    <Border DataContext="{Binding DataContext.SelectedCard, ElementName=BaseLayout}" 
+                            IsEnabled="{Binding DataContext.SelectedCard, ElementName=BaseLayout, Converter={StaticResource OppositeNullToBooleanConverter}}"
+                            Background="{DynamicResource Brush1}" 
+                            BorderBrush="{DynamicResource ContrastBrush20}" 
+                            BorderThickness="1" 
+                            Padding="12,8" 
+                            Margin="0,8,0,0" 
+                            Grid.Row="1">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,8">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                                <TextBox Text="{Binding Title}" Grid.Row="1" />
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{lex:Loc Text}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                                <Grid Grid.Row="1">
+                                    <ContentControl Template="{StaticResource TextEditorTemplate}" />
+                                </Grid>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{lex:Loc BackgroundImage}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                                <TextBox Text="{Binding ImagePath}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                                <Button Content="..." 
+                                        Command="{Binding DataContext.SelectBackgroundImageButtonCommand, ElementName=BaseLayout}" 
+                                        CommandParameter="{Binding DataContext.CardsSection, ElementName=BaseLayout}"
+                                        VerticalAlignment="Center" 
+                                        Height="21" 
+                                        Margin="4,0,0,0" 
+                                        Grid.Row="1" 
+                                        Grid.Column="1" />
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{lex:Loc Link}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                                <TextBox Text="{Binding Link}" Grid.Row="1" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ParagraphSectionDataTemplate">
+                <StackPanel Margin="20,10">
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <TextBox Text="{Binding Title}" Grid.Row="1" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Text}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <Grid Grid.Row="1">
+                            <ContentControl Template="{StaticResource TextEditorTemplate}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="{lex:Loc SubParagraphs}" Style="{StaticResource SubTitleTextStyle}" VerticalAlignment="Bottom" />
+                            <Button Content="{lex:Loc AddSubParagraph}" Command="{Binding DataContext.AddSubParagraphCommand, ElementName=BaseLayout}" CommandParameter="{Binding Path=.}" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                        </Grid>
+                        
+                        <Grid Grid.Row="1">
+                            <ItemsControl ItemsSource="{Binding SubParagraphList}" Margin="0,8,0,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,0,0,12">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <Grid Grid.Column="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+
+                                                <TextBox Text="{Binding Title}" Grid.Row="0" />
+                                                <TextBox Text="{Binding Text}" AcceptsReturn="True" TextWrapping="Wrap" Height="70" Margin="0,5,0,0" Grid.Row="1" />
+                                            </Grid>
+
+                                            <Grid Margin="5,0,0,0" Grid.Column="1">
+                                                <Button Command="{Binding DataContext.SubParagraphRemoveCommand, ElementName=BaseLayout}"
+                                                        CommandParameter="{Binding Path=.}"
+                                                        Style="{StaticResource TimesDeleteButtonStyle}" 
+                                                        VerticalAlignment="Top" 
+                                                        HorizontalAlignment="Right" />
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{lex:Loc BackgroundImage}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                        <TextBox Text="{Binding BackgroundImagePath}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                        <Button Content="..." 
+                                Command="{Binding DataContext.SelectBackgroundImageButtonCommand, ElementName=BaseLayout}" 
+                                CommandParameter="{Binding Path=.}"
+                                VerticalAlignment="Center" 
+                                Height="21" 
+                                Margin="4,0,0,0" 
+                                Grid.Row="1" 
+                                Grid.Column="1" />
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="ImageSectionDataTemplate">
+                <StackPanel Margin="20,10">
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <TextBox Text="{Binding Title}" Grid.Row="1" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Text}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <Grid Grid.Row="1">
+                            <ContentControl Template="{StaticResource TextEditorTemplate}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="{lex:Loc Images}" Style="{StaticResource SubTitleTextStyle}" VerticalAlignment="Bottom" />
+                            <Button Content="{lex:Loc AddImage}" Command="{Binding DataContext.AddImageInfoCommand, ElementName=BaseLayout}" CommandParameter="{Binding Path=.}" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <ItemsControl ItemsSource="{Binding ImageList}" HorizontalAlignment="Center" Margin="0,8,0,0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,0,10,10">
+                                            <Border Background="{DynamicResource Brush10}" BorderBrush="{DynamicResource ContrastBrush31}" BorderThickness="1" CornerRadius="1" Width="240" Padding="8,6" Margin="0,7,7,7">
+                                                <Grid VerticalAlignment="Center">
+                                                    <StackPanel>
+                                                        <Grid Margin="0,0,0,5">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="*" />
+                                                            </Grid.RowDefinitions>
+
+                                                            <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                                                            <TextBox Text="{Binding Title}" Grid.Row="1" />
+                                                        </Grid>
+
+                                                        <Grid Margin="0,0,0,5">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="*" />
+                                                            </Grid.RowDefinitions>
+
+                                                            <TextBlock Text="{lex:Loc SubTitle}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                                                            <TextBox Text="{Binding SubTitle}" Grid.Row="1" />
+                                                        </Grid>
+
+                                                        <Grid Margin="0,0,0,5">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="*" />
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <TextBlock Text="{lex:Loc Image}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                                                            <TextBox Text="{Binding ImagePath}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                                                            <Button Content="..." 
+                                                                    Command="{Binding DataContext.SelectImageInfoButtonCommand, ElementName=BaseLayout}" 
+                                                                    CommandParameter="{Binding Path=.}"
+                                                                    VerticalAlignment="Center" 
+                                                                    Height="21" 
+                                                                    Margin="4,0,0,0" 
+                                                                    Grid.Row="1" 
+                                                                    Grid.Column="1" />
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+
+                                            <Button Command="{Binding DataContext.ImageInfoRemoveCommand, ElementName=BaseLayout}"
+                                                    CommandParameter="{Binding Path=.}"
+                                                    Style="{StaticResource TimesDeleteButtonStyle}" 
+                                                    VerticalAlignment="Top" 
+                                                    HorizontalAlignment="Right" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{lex:Loc BackgroundImage}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                        <TextBox Text="{Binding BackgroundImagePath}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                        <Button Content="..." 
+                                Command="{Binding DataContext.SelectBackgroundImageButtonCommand, ElementName=BaseLayout}" 
+                                CommandParameter="{Binding Path=.}"
+                                VerticalAlignment="Center" 
+                                Height="21" 
+                                Margin="4,0,0,0" 
+                                Grid.Row="1" 
+                                Grid.Column="1" />
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="BlogSectionDataTemplate">
+                <StackPanel Margin="20,10">
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <TextBox Text="{Binding SubTitle}" Grid.Row="1" />
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{lex:Loc Text}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                        <Grid Grid.Row="1">
+                            <ContentControl Template="{StaticResource TextEditorTemplate}" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{lex:Loc Images}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                        <TextBox Text="{Binding SliderImagePathsString, Mode=OneWay}" IsReadOnly="True" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                        <Button Content="..." 
+                                Command="{Binding DataContext.SelectBackgroundImageButtonCommand, ElementName=BaseLayout}" 
+                                CommandParameter="{Binding Path=.}"
+                                VerticalAlignment="Center" 
+                                Height="21" 
+                                Margin="4,0,0,0" 
+                                Grid.Row="1" 
+                                Grid.Column="1" />
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GallerySectionDataTemplate">
+                <Border Margin="20,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                            <TextBox Text="{Binding Title}" Grid.Row="1" />
+                        </Grid>
+
+                        <Border Grid.Row="1">
+                            <Grid>
+                                <WrapPanel>
+                                    <Button Content="{lex:Loc AddImage}" 
+                                            Command="{Binding DataContext.SelectBackgroundImageButtonCommand, ElementName=BaseLayout}" 
+                                            CommandParameter="{Binding Path=.}"
+                                            VerticalAlignment="Center" />
+                                </WrapPanel>
+                            </Grid>
+                        </Border>
+
+                        <Border Margin="0,25,0,0" Grid.Row="1">
+                            <Grid>
+                                <ItemsControl ItemsSource="{Binding ImageList}" HorizontalAlignment="Center" Margin="0,8,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,0,8,8">
+                                                <Border Background="{DynamicResource Brush10}" BorderBrush="{DynamicResource ContrastBrush31}" BorderThickness="1" CornerRadius="1" Width="300" Padding="8,6" Margin="0,7,7,7">
+                                                    <Grid VerticalAlignment="Center">
+                                                        <StackPanel>
+                                                            <Image Source="{Binding ImagePath, Converter={StaticResource AbsolutePathConverter}}" Stretch="UniformToFill" />
+                                                            
+                                                            <Grid Margin="0,10,0,8">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto" />
+                                                                    <RowDefinition Height="*" />
+                                                                </Grid.RowDefinitions>
+
+                                                                <TextBlock Text="{lex:Loc Caption}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                                                                <TextBox Text="{Binding Title}" Grid.Row="1" />
+                                                            </Grid>
+
+                                                            <Grid Margin="0,0,0,5">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto" />
+                                                                    <RowDefinition Height="*" />
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <TextBlock Text="{lex:Loc Image}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                                                                <TextBox Text="{Binding ImagePath}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                                                                <Button Content="..." 
+                                                                        Command="{Binding DataContext.SelectImageInfoButtonCommand, ElementName=BaseLayout}" 
+                                                                        CommandParameter="{Binding Path=.}"
+                                                                        VerticalAlignment="Center" 
+                                                                        Height="21" 
+                                                                        Margin="4,0,0,0" 
+                                                                        Grid.Row="1" 
+                                                                        Grid.Column="1" />
+                                                            </Grid>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+
+                                                <Button Command="{Binding DataContext.ImageInfoRemoveCommand, ElementName=BaseLayout}"
+                                                        CommandParameter="{Binding Path=.}"
+                                                        Style="{StaticResource TimesDeleteButtonStyle}" 
+                                                        VerticalAlignment="Top" 
+                                                        HorizontalAlignment="Right" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <converters:SectionTemplateSelector x:Key="SectionTemplateSelector" 
+                                                BannerTemplate="{StaticResource BannerDataTemplate}" 
+                                                MetroSectionTemplate="{StaticResource MetroDataTemplate}"
+                                                BasicSectionTemplate="{StaticResource BasicSectionDataTemplate}" 
+                                                CardsSectionTemplate="{StaticResource CardsSectionDataTemplate}"
+                                                ImageSectionTemplate="{StaticResource ImageSectionDataTemplate}" 
+                                                ParagraphSectionTemplate="{StaticResource ParagraphSectionDataTemplate}" 
+                                                BlogSectionTemplate="{StaticResource BlogSectionDataTemplate}"
+                                                GallerySectionTemplate="{StaticResource GallerySectionDataTemplate}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Visibility="{Binding IsNotEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{lex:Loc SelectSectionTypeMessage}" HorizontalAlignment="Center" />
+            <ScrollViewer VerticalScrollBarVisibility="Disabled" 
+                          HorizontalScrollBarVisibility="Auto" 
+                          HorizontalAlignment="Center" 
+                          Margin="5,10,5,5" 
+                          Grid.Row="1">
+                <WrapPanel>
+                    <RadioButton DataContext="{Binding BannerSection}" 
+                                 Template="{StaticResource SectionTypeRadioButtonTemplate}" 
+                                 Checked="SectionTypeRadioButton_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <fa:ImageAwesome Icon="Anchor" Foreground="#1154DE" Width="30" Height="30" Grid.Row="0" />
+                            <TextBlock Text="Banner" Margin="0,7,0,0" Grid.Row="1" />
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton DataContext="{Binding MetroSection}" 
+                                 Template="{StaticResource SectionTypeRadioButtonTemplate}" 
+                                 Checked="SectionTypeRadioButton_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <fa:ImageAwesome Icon="BlackTie" Foreground="#E43154" Width="30" Height="30" Grid.Row="0" />
+                            <TextBlock Text="MetroBanner" Margin="0,7,0,0" Grid.Row="1" />
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton DataContext="{Binding BasicSection}" 
+                                 Template="{StaticResource SectionTypeRadioButtonTemplate}" 
+                                 Checked="SectionTypeRadioButton_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <fa:ImageAwesome Icon="StickyNote" Foreground="#75CE13" Width="30" Height="30" Grid.Row="0" />
+                            <TextBlock Text="Basic" Margin="0,7,0,0" Grid.Row="1" />
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton DataContext="{Binding CardsSection}" 
+                                 Template="{StaticResource SectionTypeRadioButtonTemplate}" 
+                                 Checked="SectionTypeRadioButton_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <fa:ImageAwesome Icon="Clone" Foreground="#75139E" Width="30" Height="30" Grid.Row="0" />
+                            <TextBlock Text="Cards" Margin="0,7,0,0" Grid.Row="1" />
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton DataContext="{Binding ParagraphSection}" 
+                             Template="{StaticResource SectionTypeRadioButtonTemplate}" 
+                             Checked="SectionTypeRadioButton_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <fa:ImageAwesome Icon="PencilSquare" Foreground="#CE7513" Width="30" Height="30" Grid.Row="0" />
+                            <TextBlock Text="Paragraph" Margin="0,7,0,0" Grid.Row="1" />
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton DataContext="{Binding ImageSection}" 
+                                 Template="{StaticResource SectionTypeRadioButtonTemplate}" 
+                                 Checked="SectionTypeRadioButton_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <fa:ImageAwesome Icon="Image" Foreground="#CC1414" Width="30" Height="30" Grid.Row="0" />
+                            <TextBlock Text="Images" Margin="0,7,0,0" Grid.Row="1" />
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton DataContext="{Binding BlogSection}" 
+                                 Template="{StaticResource SectionTypeRadioButtonTemplate}" 
+                                 Checked="SectionTypeRadioButton_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <fa:ImageAwesome Icon="Table" Foreground="#CCCC14" Width="30" Height="30" Grid.Row="0" />
+                            <TextBlock Text="Blog" Margin="0,7,0,0" Grid.Row="1" />
+                        </Grid>
+                    </RadioButton>
+                    
+                    <RadioButton DataContext="{Binding GallerySection}" 
+                                 Template="{StaticResource SectionTypeRadioButtonTemplate}" 
+                                 Checked="SectionTypeRadioButton_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <fa:ImageAwesome Icon="PictureOutline" Foreground="#CC1425" Width="30" Height="30" Grid.Row="0" />
+                            <TextBlock Text="Gallery" Margin="0,7,0,0" Grid.Row="1" />
+                        </Grid>
+                    </RadioButton>
+                </WrapPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <Border Grid.Row="1">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ContentControl Content="{Binding SelectedSection}" ContentTemplateSelector="{StaticResource SectionTemplateSelector}" />
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,31 @@
+﻿namespace Ertis.WebService.Dao.MySql
+{
+    public class ConnectionString
+    {
+        public string Server { get; set; }
+
+        public string Port { get; set; }
+
+        public string Username { get; set; }
+
+        public string Password { get; set; }
+
+        public string Database { get; set; }
+
+        public bool PersistSecurityInfo { get; set; }
+
+        public string Charset { get; set; }
+
+        public ConnectionString()
+        {
+            
+		}
+
+        public override string ToString()
+        {
+            return string.Format("server={0};user id={1};password={2};persistsecurityinfo={3};port={4};database={5};charset={6};",
+                                 this.Server, this.Username, this.Password, this.PersistSecurityInfo, this.Port, this.Database, this.Charset);
+		}
+
+	}
+}

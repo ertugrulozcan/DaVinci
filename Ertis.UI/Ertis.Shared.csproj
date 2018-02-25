@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F1322BC4-F75C-411D-BB70-4BDC8136CE9A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ertis.Shared</RootNamespace>
+    <AssemblyName>Ertis.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Data.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Mvvm.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v16.2.Core">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Pdf.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.2.Core">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Printing.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Core.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Docking.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v16.2.Core">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Layout.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisDark.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Themes.MetropolisDark.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisLight.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Themes.MetropolisLight.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016White.v16.2">
+      <HintPath>..\Libs\DevExpress\16.2\DevExpress.Xpf.Themes.Office2016White.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\Libs\Prism\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity">
+      <HintPath>..\Libs\Prism\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.UnityExtensions">
+      <HintPath>..\Libs\Prism\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\Libs\ServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\Libs\Unity\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\Libs\Unity\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\Libs\Unity\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WPFLocalizeExtension, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFLocalizeExtension.3.0.1\lib\net35\WPFLocalizeExtension.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="XamlBuildTask" />
+    <Reference Include="XAMLMarkupExtensions, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAMLMarkupExtensions.1.2.2\lib\net40\XAMLMarkupExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\DockViewCommand.cs" />
+    <Compile Include="Commands\OpenModalViewCommand.cs" />
+    <Compile Include="Commands\OpenViewCommand.cs" />
+    <Compile Include="Components\CustomMessageBox.xaml.cs">
+      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ProgressRing.xaml.cs">
+      <DependentUpon>ProgressRing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ScreenSwitcher.xaml.cs">
+      <DependentUpon>ScreenSwitcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ListCountToVisibilityBoolConverter.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Converters\ReferenceEqualToBooleanConverter.cs" />
+    <Compile Include="Converters\SelectedTextColorConverter.cs" />
+    <Compile Include="Events\CurrentScreenChangedEvent.cs" />
+    <Compile Include="Events\MainViewLoadedEvent.cs" />
+    <Compile Include="Events\SetBoundsWindowRequestEvent.cs" />
+    <Compile Include="Helpers\BindingProxy.cs" />
+    <Compile Include="Helpers\FontAwesomeHelper.cs" />
+    <Compile Include="Helpers\ReflectionHelper.cs" />
+    <Compile Include="Helpers\UIHelper.cs" />
+    <Compile Include="Helpers\VisualHelper.cs" />
+    <Compile Include="Helpers\Win32WindowHelper.cs" />
+    <Compile Include="Interfaces\IShell.cs" />
+    <Compile Include="ModalWindow\Contracts\ICustomContentDialog.cs" />
+    <Compile Include="ModalWindow\Contracts\ICustomOkCancelControl.cs" />
+    <Compile Include="ModalWindow\Contracts\IDialog.cs" />
+    <Compile Include="ModalWindow\Contracts\IDialogConfig.cs" />
+    <Compile Include="ModalWindow\Contracts\IDialogHost.cs" />
+    <Compile Include="ModalWindow\Contracts\IDialogManager.cs" />
+    <Compile Include="ModalWindow\Contracts\IMessageDialog.cs" />
+    <Compile Include="ModalWindow\Contracts\IProgressDialog.cs" />
+    <Compile Include="ModalWindow\Contracts\IWaitDialog.cs" />
+    <Compile Include="ModalWindow\Dialogs\CustomContentDialog.cs" />
+    <Compile Include="ModalWindow\Dialogs\DialogBase.cs" />
+    <Compile Include="ModalWindow\Dialogs\DialogWindowType.cs" />
+    <Compile Include="ModalWindow\Dialogs\MessageDialog.cs" />
+    <Compile Include="ModalWindow\Dialogs\WaitProgressDialog.cs" />
+    <Compile Include="ModalWindow\Helpers\DialogLayeringHelper.cs" />
+    <Compile Include="ModalWindow\Manager\DialogCloseBehavior.cs" />
+    <Compile Include="ModalWindow\Manager\DialogManager.cs" />
+    <Compile Include="ModalWindow\Manager\DialogMode.cs" />
+    <Compile Include="ModalWindow\Manager\DialogResultState.cs" />
+    <Compile Include="ModalWindow\Views\DialogBaseControl.xaml.cs">
+      <DependentUpon>DialogBaseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModalWindow\Views\WaitProgressDialogControl.xaml.cs">
+      <DependentUpon>WaitProgressDialogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CommandMenuItem.cs" />
+    <Compile Include="Models\DockableViewMenuItem.cs" />
+    <Compile Include="Models\IViewMenuItem.cs" />
+    <Compile Include="Models\ModalViewMenuItem.cs" />
+    <Compile Include="Models\SettingsViewMenuItem.cs" />
+    <Compile Include="Models\ViewMenuItem.cs" />
+    <Compile Include="Models\ViewMenuItemBase.cs" />
+    <Compile Include="RegionAdapters\DockingRegionAdapter.cs" />
+    <Compile Include="Routing\Contracts\HasSettingsModule.cs" />
+    <Compile Include="Routing\Contracts\IGuiRoutableModule.cs" />
+    <Compile Include="Routing\GuiRoutableModule.cs" />
+    <Compile Include="ScreenManagement\WpfScreen.cs" />
+    <Compile Include="ScreenManagement\WpfScreenManager.cs" />
+    <Compile Include="Search\ISearchable.cs" />
+    <Compile Include="Search\SearchResultBadge.cs" />
+    <Compile Include="Services\Contracts\IGuiRoutingService.cs" />
+    <Compile Include="Services\Contracts\IModalDialogService.cs" />
+    <Compile Include="Services\Contracts\ITopMenuPresenter.cs" />
+    <Compile Include="Services\Contracts\IWindowNavigationService.cs" />
+    <Compile Include="Services\GuiRoutingService.cs" />
+    <Compile Include="Services\ModalDialogService.cs" />
+    <Compile Include="Services\NavigationWrapperType.cs" />
+    <Compile Include="Services\WindowNavigationService.cs" />
+    <Compile Include="SharedModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\NavigationManagerViewModel.cs" />
+    <Compile Include="Views\MainDockingView.xaml.cs">
+      <DependentUpon>MainDockingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NavigationManagerView.xaml.cs">
+      <DependentUpon>NavigationManagerView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ErtAwesome\ErtAwesome.csproj">
+      <Project>{c496c03b-eee4-43cc-9c10-95b6c5213de1}</Project>
+      <Name>ErtAwesome</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ertis.Infrastructure\Ertis.Infrastructure.csproj">
+      <Project>{9f178d9f-ecfa-4f8d-bc50-ac9ef3a2ac92}</Project>
+      <Name>Ertis.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ertis.Localization\Ertis.Localization.csproj">
+      <Project>{4077d586-94f5-47ff-9400-1d11dd4d02ca}</Project>
+      <Name>Ertis.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ertis.Themes\Ertis.Themes.csproj">
+      <Project>{8c05345a-0d0d-460f-9acc-0471733d6dba}</Project>
+      <Name>Ertis.Themes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Components\CustomMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ProgressRing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ScreenSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModalWindow\Views\DialogBaseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModalWindow\Views\WaitProgressDialogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\SharedResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainDockingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NavigationManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\progressRing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

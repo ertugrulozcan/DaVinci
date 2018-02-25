@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Ertis.DaVinci.Views.AddPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ertis.DaVinci.Views"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800"
+             x:Name="BaseLayout">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Ertis.Shared;component/Resources/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid MinWidth="400">
+        <StackPanel Margin="20,10">
+            <Grid Margin="0,0,0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{lex:Loc Name}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                <TextBox Text="{Binding Name}" Grid.Row="1" />
+                <TextBlock Text="{Binding PagePath}" Foreground="{DynamicResource ContrastBrush15}" FontStyle="Italic" Margin="0,3,0,0" Grid.Row="2" />
+            </Grid>
+            
+            <Grid Margin="0,0,0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{lex:Loc Title}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" />
+                <TextBox Text="{Binding Title}" Grid.Row="1" />
+            </Grid>
+
+            <Grid Margin="0,15,0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{lex:Loc Logo}" Style="{StaticResource SubTitleTextStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                <TextBox Text="{Binding LogoPath}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                <Button Content="..." 
+                                Command="{Binding DataContext.SelectLogoButtonCommand, ElementName=BaseLayout}" 
+                                VerticalAlignment="Center" 
+                                Height="21" 
+                                Margin="4,0,0,0" 
+                                Grid.Row="1" 
+                                Grid.Column="1" />
+            </Grid>
+
+            <Grid Margin="0,20,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox Content="{lex:Loc HasContactSection}" IsChecked="{Binding HasContactSection}" />
+                    <CheckBox Content="{lex:Loc HasGoogleMapsSection}" IsChecked="{Binding HasGoogleMapsSection}" Margin="10,0,0,0" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

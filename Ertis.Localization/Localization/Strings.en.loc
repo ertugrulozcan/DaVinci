@@ -1,0 +1,96 @@
+﻿Key;Value
+Username;Username
+Password;Password
+Required;Required
+SignIn;Sign-In
+UsernameOrPasswordIncorrect;Username or password incorrect!
+UserDeactivated;User account has been deactivated.
+CouldNotConnectToServer;Cannot connect to server. Please check your internet connection and ports.
+ErpCrm;ERP/CRM
+Systems;Systems
+Settings;Settings
+General;General
+Account;Account
+Appearence;Appearence
+Language;Language
+Theme;Theme
+UserID;User ID
+UserRole;User Role
+Name;Name
+Surname;Surname
+EmailAddress;Email Address
+PhoneNumber;Phone
+BirthDate;Birth Date
+JoinDate;Join Date
+SessionCreationTime;Session Time
+PleaseWait;Please Wait
+PleaseWait3D;Please Wait...
+Edit;Edit
+Save;Save
+Cancel;Cancel
+Ok;Ok
+Yes;Yes
+No;No
+Live;Live
+Test;Test
+Demo;Demo
+Localhost;Localhost
+ScreenSwitcherSettingsCaption;Show the Screen Management Bar
+UpdateInformations;Update Informations
+Dashboard;Dashboard
+
+DaVinciModule;DaVinci
+Designer;Designer
+SolutionExplorer;Solution Explorer
+
+New;New
+Open;Open
+Refresh;Refresh
+Save;Save
+Export;Export
+
+NewProject;New Project
+NewPage;New Page
+FolderPath;Folder Path
+Pages;Pages
+Add;Add
+AddSection;Add Section
+NewSection;Add Section
+SelectSectionTypeMessage;Select a section type
+Delete;Delete
+MoveUp;Move Up
+MoveDown;Move Down
+
+Title;Title
+Text;Text
+SubTitle;Sub Title
+Images;Images
+AddImage;Add Image
+BackgroundImage;Background Image
+SliderImages;Slider Images
+Link;Link
+SubParagraphs;Sub Paragraphs
+AddSubParagraph;Add SubParagraph
+Logo;Logo
+AreYouSure;Are you sure?
+DeleteSectionMessage;Section will be deleted? Are you sure?
+PageSettings;Page Settings
+SiteSettings;Site Settings
+Caption;Caption
+Image;Image
+AddCard;Add Card
+Cards;Cards
+
+HasContactSection;Has contact section
+HasGoogleMapsSection;Has google maps section
+
+ContactInformations;Contact Information
+SocialMedia;Social Media
+GoogleMapsSettings;Google Maps Settings
+Latitude;Latitude
+Longitude;Longitude
+FooterText;Footer Text
+
+ExportSuccessMessage;The project successfully exported
+SaveSuccessMessage;The project successfully saved
+Message;Message

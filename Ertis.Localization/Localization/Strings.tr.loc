@@ -1,0 +1,103 @@
+﻿Key;Value
+Username;Kullanıcı Adı
+Password;Parola
+Required;Zorunlu
+SignIn;Giriş
+UsernameOrPasswordIncorrect;Kullanıcı adı veya parola hatalı!
+UserDeactivated;Kullanıcı hesabı askıya alınmış.
+CouldNotConnectToServer;Sunucuya bağlanılamıyor. İnternet ve port ayarlarınızı kontrol ediniz.
+ErpCrm;ERP/CRM
+Systems;Sistemleri
+Settings;Ayarlar
+General;Genel
+Account;Hesap
+Appearence;Görünüm
+Language;Dil
+Theme;Tema
+UserID;User ID
+UserRole;Kullanıcı Türü
+Name;İsim
+Surname;Soyisim
+EmailAddress;E-posta Adresi
+PhoneNumber;Telefon Numarası
+BirthDate;Doğum Tarihi
+JoinDate;Kayıt Tarihi
+SessionCreationTime;Oturum Zamanı
+PleaseWait;Lütfen Bekleyiniz
+PleaseWait3D;Lütfen Bekleyiniz...
+Edit;Düzenle
+Save;Kaydet
+Cancel;İptal
+Ok;Tamam
+Yes;Evet
+No;Hayır
+Live;Canlı
+Test;Test
+Demo;Demo
+Localhost;Localhost
+ScreenSwitcherSettingsCaption;Ekran Yönetim Çubuğunu Göster
+UpdateInformations;Bilgileri Güncelle
+
+UserModule;
+OrganizationManagement;
+OrganizationModule;
+OrganizationManagement;
+OrganizationSettings;
+Dashboard;Dashboard
+
+DaVinciModule;DaVinci
+Designer;Designer
+SolutionExplorer;Dosya Gezgini
+
+New;Yeni
+Open;Aç
+Refresh;Yenile
+Save;Kaydet
+Export;Export
+
+NewProject;Yeni Proje
+NewPage;Yeni Sayfa
+FolderPath;Dosya yolu
+Pages;Sayfalar
+Add;Ekle
+AddSection;Section Ekle
+NewSection;Section Ekle
+SelectSectionTypeMessage;Bir section tipi seçiniz
+Title;Başlık
+Delete;Sil
+MoveUp;Yukarı taşı
+MoveDown;Aşağı taşı
+
+Title;Başlık
+Text;Metin
+SubTitle;Alt Başlık
+Images;Görseller
+AddImage;Görsel Ekle
+BackgroundImage;Arkaplan Görseli
+SliderImages;Slider Görselleri
+Link;Link
+SubParagraphs;Alt Paragraflar
+AddSubParagraph;Alt Paragraf Ekle
+Logo;Logo
+AreYouSure;Emin misiniz?
+DeleteSectionMessage;Section silinecek. Emin misiniz?
+PageSettings;Sayfa Ayarları
+SiteSettings;Site Ayarları
+Caption;Başlık
+Image;Görsel
+AddCard;Kart Ekle
+Cards;Kartlar
+
+HasContactSection;İletişim alanı eklensin mi?
+HasGoogleMapsSection;Google haritalar eklensin mi?
+
+ContactInformations;İletişim Bilgileri
+SocialMedia;Sosyal Medya
+GoogleMapsSettings;Google Maps Ayarları
+Latitude;Enlem
+Longitude;Boylam
+FooterText;Footer Metni
+
+ExportSuccessMessage;Proje başarıyla dışarı aktarıldı
+SaveSuccessMessage;Proje başarıyla kaydedildi
+Message;Mesaj

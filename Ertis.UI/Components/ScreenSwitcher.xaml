@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="Ertis.Shared.Components.ScreenSwitcher"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ertis.Shared.Components"
+             xmlns:converters="clr-namespace:Ertis.Shared.Converters"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="BaseLayout">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <converters:ListCountToVisibilityBoolConverter x:Key="ListCountToVisibilityBoolConverter" />
+
+        <ControlTemplate x:Key="SmallButtonTemplate" TargetType="{x:Type RadioButton}">
+            <Border x:Name="border" BorderThickness="1" CornerRadius="1" Padding="5,0" SnapsToDevicePixels="True" Height="18">
+                <Grid x:Name="grid">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome x:Name="icon" Icon="Television" Height="11" Foreground="{DynamicResource ContrastBrush6}" SnapsToDevicePixels="True" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="resulotion" FontFamily="Segoe WP" FontSize="9.5" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="{DynamicResource ContrastBrush6}" SnapsToDevicePixels="True" Margin="4,0,0,0">
+                            <Run Text="{Binding DeviceBounds.Width, Mode=OneWay}"/>
+                            <Run Text="x"/>
+                            <Run Text="{Binding DeviceBounds.Height, Mode=OneWay}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Opacity" Value="1" TargetName="grid"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter Property="Opacity" Value="0.5" TargetName="grid"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="Background" Value="#F88A08" TargetName="border"/>
+                    <Setter Property="BorderBrush" Value="#F66F00" TargetName="border"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="{x:Null}" TargetName="border"/>
+                    <Setter Property="BorderBrush" Value="Transparent" TargetName="border"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="BigButtonTemplate" TargetType="{x:Type RadioButton}">
+            <Border x:Name="border" BorderThickness="1" CornerRadius="1" Padding="5,4,5,2" SnapsToDevicePixels="True">
+                <Grid x:Name="grid">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <fa:ImageAwesome x:Name="icon" 
+                                         Icon="Television" 
+                                         Foreground="{DynamicResource ContrastBrush6}" 
+                                         SnapsToDevicePixels="True" 
+                                         VerticalAlignment="Bottom" 
+                                         HorizontalAlignment="Center" 
+                                         Height="14"
+                                         Grid.Row="0" />
+                        
+                        <fa:ImageAwesome Icon="Check" 
+                                         Foreground="{DynamicResource ContrastBrush6}" 
+                                         Visibility="{Binding IsPrimary, Converter={StaticResource BoolToVisConverter}}"
+                                         SnapsToDevicePixels="True" 
+                                         VerticalAlignment="Bottom" 
+                                         HorizontalAlignment="Center" 
+                                         Height="6" 
+                                         Margin="0,0,0,5" 
+                                         Grid.Row="0"/>
+                        
+                        <TextBlock x:Name="resulotion" FontFamily="Segoe WP" FontSize="9.5" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="{DynamicResource ContrastBrush6}" SnapsToDevicePixels="True" Margin="0,3,0,0" Grid.Row="1">
+                            <Run Text="{Binding DeviceBounds.Width, Mode=OneWay}"/>
+                            <Run Text="x"/>
+                            <Run Text="{Binding DeviceBounds.Height, Mode=OneWay}"/>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Opacity" Value="1" TargetName="grid"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter Property="Opacity" Value="0.5" TargetName="grid"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="Background" Value="#F88A08" TargetName="border"/>
+                    <Setter Property="BorderBrush" Value="#F66F00" TargetName="border"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="{x:Null}" TargetName="border"/>
+                    <Setter Property="BorderBrush" Value="Transparent" TargetName="border"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="ScreenSwitcherListBoxItemContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <RadioButton Template="{StaticResource BigButtonTemplate}" 
+                                     IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}" 
+                                     Click="ScreenToggleRadioButton_Click" 
+                                     ClickMode="Release" 
+                                     ToolTipService.ShowOnDisabled="True" 
+                                     Background="Transparent"
+                                     Margin="0,0,5,0">
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <TextBlock>
+                                        <Run Text="{Binding DeviceName, Mode=OneWay}"/>
+                                        <Run Text="("/><Run Text="{Binding DeviceBounds.Width, Mode=OneWay}"/>
+                                        <Run Text="x"/>
+                                        <Run Text="{Binding DeviceBounds.Height, Mode=OneWay}"/><Run Text=")"/>
+                                    </TextBlock>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NoBorderListBoxStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <ListBox x:Name="ScreensListBox" 
+                 ItemsSource="{Binding ScreenManager.ScreenList, ElementName=BaseLayout}" 
+                 SelectedItem="{Binding ScreenManager.CurrentScreen, Mode=OneWay, ElementName=BaseLayout}"
+                 Style="{StaticResource NoBorderListBoxStyle}"
+                 ItemContainerStyle="{StaticResource ScreenSwitcherListBoxItemContainerStyle}"
+                 Visibility="{Binding ScreenManager.ScreenList.Count, ElementName=BaseLayout, Converter={StaticResource ListCountToVisibilityBoolConverter}}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 Padding="0,0,-5,0"
+                 SnapsToDevicePixels="True">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,81 @@
+﻿<Window x:Class="Ertis.Desktop.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ertis.Desktop"
+        xmlns:app="clr-namespace:Ertis.Infrastructure.Application;assembly=Ertis.Infrastructure"
+		xmlns:cal="http://www.codeplex.com/prism"
+        mc:Ignorable="d"
+        SnapsToDevicePixels="True"
+        WindowStartupLocation="CenterScreen"
+		StateChanged="Window_StateChanged"
+        Height="600" Width="1000"
+        Title="Ertis"
+        x:Name="MainWindow">
+
+    <!-- NOT : FullScreen için; WindowStyle="None" -->
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Ertis.Desktop;component/Resources/WindowResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=TitleBar}" UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+
+    <Border x:Name="BaseWindowBorder" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource WindowBorderBrush}" BorderThickness="1">
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid PreviewMouseDown="Grid_PreviewMouseDown" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <Border x:Name="TitleBar" Background="{DynamicResource SecondaryBackgroundBrush}" BorderBrush="{DynamicResource PrimaryBorderBrush}" BorderThickness="0,0,0,1" Grid.Row="0">
+                        <Grid>
+                            <ContentControl cal:RegionManager.RegionName="{Binding Source={x:Static app:RegionNames.HeaderBarRegion}}" FocusVisualStyle="{x:Null}" Margin="50,0,0,0" />
+
+                            <Grid VerticalAlignment="Top" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True" Margin="5,4">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="MinimizeButton" Style="{StaticResource MinimizeButtonStyle}" Click="MinimizeButton_Click" Margin="0,0,2,0" />
+                                    <Button x:Name="MaximizeButton" Style="{StaticResource MaximizeButtonStyle}" Click="MaximizeButton_Click" Margin="0,0,2,0" />
+                                    <Button x:Name="NormalizeButton" Style="{StaticResource NormalizeButtonStyle}" Click="NormalizeButton_Click" Margin="0,0,2,0" />
+                                    <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}" Click="CloseButton_Click" Margin="0,0,2,0" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <!-- Content -->
+                    <Grid Grid.Row="1">
+                        <ContentControl x:Name="MainRegionContentControl" cal:RegionManager.RegionName="{Binding Source={x:Static app:RegionNames.MainRegion}}" FocusVisualStyle="{x:Null}" Margin="50,0,0,0" />
+                    </Grid>
+                </Grid>
+
+                <!-- LeftSidePanel -->
+                <Grid HorizontalAlignment="Left" WindowChrome.IsHitTestVisibleInChrome="True" Grid.Row="0">
+                    <ContentControl cal:RegionManager.RegionName="{Binding Source={x:Static app:RegionNames.LeftSidePanelRegion}}" FocusVisualStyle="{x:Null}" />
+                </Grid>
+
+                <!-- Footer -->
+                <Grid Grid.Row="1">
+                    <ContentControl cal:RegionManager.RegionName="{Binding Source={x:Static app:RegionNames.FooterBarRegion}}" FocusVisualStyle="{x:Null}" />
+                </Grid>
+            </Grid>
+
+            <ContentControl x:Name="DialogManagerPlaceHolder" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+        </Grid>
+    </Border>
+</Window>

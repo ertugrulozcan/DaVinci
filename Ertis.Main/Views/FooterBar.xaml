@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Ertis.Main.Views.FooterBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ertis.Main.Views"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             mc:Ignorable="d" 
+             Height="25"
+             d:DesignHeight="25" d:DesignWidth="1000">
+
+    <Border Background="{DynamicResource FooterBarBackgroundBrush}" BorderBrush="{DynamicResource PrimaryBorderBrush}" BorderThickness="0,1,0,0">
+        <Grid Margin="10,0">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
+                <TextBlock Foreground="{DynamicResource ContrastBrush7}" FontSize="10.5">
+                    <Run Text="Copyright" FontWeight="Bold" />
+                    <Run Text="ERTIS ©" />
+                    <Run Text="2017" />
+                </TextBlock>
+            </Grid>
+
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Foreground="{DynamicResource ContrastBrush7}" FontSize="10.5">
+                    <Run Text="ERTIS" />
+                    <Run Text="{lex:Loc ErpCrm}" FontWeight="Bold" />
+                    <Run Text="{lex:Loc Systems}" />
+                </TextBlock>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
